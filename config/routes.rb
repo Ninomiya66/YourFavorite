@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/check'
-  end
   root 'public/homes#top'
 
   # 顧客用
