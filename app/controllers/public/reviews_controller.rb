@@ -1,5 +1,7 @@
 class Public::ReviewsController < ApplicationController
 
+  before_action :authenticate_customer!, {only: [:new, :create, :show, :edit, :update, :destroy]}
+
   def index
     @reviews =Review.all
   end
@@ -10,7 +12,8 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    if @review.save!
+    @review.customer_id = current_customer.id
+    if @review.save
       redirect_to review_path(@review)
     else
       render :new
@@ -26,7 +29,9 @@ class Public::ReviewsController < ApplicationController
   end
 
   def update
-    if @review = Review.find(params[:id])
+    @review = Review.find(params[:id])
+    @review.customer_id = current_customer.id
+    if @review.update(review_params)
       redirect_to review_path(@review)
     else
       render :edit
@@ -43,7 +48,7 @@ class Public::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:image, :name, :maker, :genre, :price, :introduction, :status)
+    params.require(:review).permit(:customer_id, :image, :name, :maker, :genre, :price, :introduction, :status)
   end
 
 end

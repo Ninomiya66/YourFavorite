@@ -5,6 +5,60 @@
 
       <h2 class="text-center mt-5 mb-5">投稿内容</h2>
 
+      <table class="table">
+
+        <tr>
+          <th></th>
+          <td><%= image_tag @review.get_image(500,500) %></td>
+        </tr>
+
+        <tr>
+          <th>商品名</th>
+          <td><%= @review.name %></td>
+        </tr>
+
+        <tr>
+          <th>メーカー名</th>
+          <td><%= @review.maker %></td>
+        </tr>
+
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @review.genre %></td>
+        </tr>
+
+        <tr>
+          <th>税抜価格</th>
+          <td><%= @review.price %></td>
+        </tr>
+
+        <tr>
+          <th>評価内容</th>
+          <td><%= @review.introduction %></td>
+        </tr>
+
+         <% if @review.customer_id == current_customer.id %>
+         <tr>
+           <th>公開/非公開設定</th>
+           <td>
+             <% if  @review.status == 1 %>
+             公開
+             <% else %>
+             非公開
+             <% end %>
+            </td>
+         </tr>
+         <% end %>
+      </table>
+
+      <% if @review.customer_id == current_customer.id %>
+      <%= link_to "編集", edit_review_path(@review), class: "btn btn-outline-primary btn-block" %>
+      <% end %>
+      <%= link_to "Back", reviews_path, class: "btn btn-outline-secondary btn-block" %>
+
+
+      </div>
+
     </div>
 
   </div>
