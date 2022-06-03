@@ -1,8 +1,9 @@
-<div class="container">
-  <div class="text-center">
-    <h2 class="text-danger mt-5 mb-5">本当に退会しますか？</h2>
+<div class="container" style="height: 100vh;">
+  <div class="row justify-content-center"  style="height: 100%;">
 
-    <div class="row justify-content-center">
+    <div style="height: 100%;">
+
+      <h2 class="text-danger mt-5 mb-5">本当に退会しますか？</h2>
 
       <div class="text-center border border-danger rounded ">
         <p class="mt-2 ml-2"> 退会すると会員情報や</p>
@@ -10,16 +11,14 @@
         <p class="mt-2 ml-2">退会をする場合は</p>
         <p class="mt-3 ml-2"><span class="text-danger">「退会」</span>をクリックしてください。</p>
       </div>
+
+      <div class="text-center mt-3">
+        <%= link_to "Back", customer_path(current_customer), class: "btn btn-outline-primary" %>
+        |
+        <%= link_to "退会", out_customers_path, method: :patch, class: "btn btn-outline-danger" %>
+      </div>
+
     </div>
 
   </div>
-
-  <div class="row justify-content-center">
-    <%= link_to "Back", customer_path(current_customer), class: "btn btn-outline-primary mt-4 mr-2 ml-2 mb-4" %>
-
-    |
-
-    <%= link_to "退会", out_customers_path, method: :patch, class: "btn btn-outline-danger ml-2" %>
-  </div>
-
 </div>

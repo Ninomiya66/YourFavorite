@@ -18,6 +18,11 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :reviews, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+      resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :edit, :update, :destroy]
+    end
+
   end
 
   # 管理者用
