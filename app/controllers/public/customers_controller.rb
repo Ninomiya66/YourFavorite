@@ -2,6 +2,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
+    @reviews = @customer.reviews.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
   end
 
   def edit

@@ -5,6 +5,10 @@
 
       <h2 class="text-center mt-5 mb-5">投稿内容編集</h2>
 
+      <div class="text-right">
+        <%= link_to "投稿の削除", review_path(@review), method: :delete, class: "btn btn-outline-danger mb-3", data: { confirm: "【確認] 投稿を削除しますか？" } %>
+      </div>
+
       <%= form_with model: @review, url: review_path, method: :patch do |f| %>
 
       <table class="table">
