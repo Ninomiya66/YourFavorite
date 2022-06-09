@@ -3,7 +3,7 @@
 
     <div style="height: 100%;">
 
-      <h2 class="text-center mt-5 mb-5">投稿内容</h2>
+      <h2 class="text-center mt-3 mb-3">投稿内容</h2>
 
       <table class="table">
 
@@ -41,16 +41,20 @@
 
       <div>
         <p>コメント件数：<%= @review.comments.count %></p>
-        <%= @review.comments.each do |comment| %>
+        <% @review.comments.each do |comment| %>
           <%= comment.customer.name %>
-          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+          <%= comment.comment %>
+          <% if comment.customer == current_customer %>
+          <%= link_to "削除", review_comment_path(comment.review, comment), method: :delete, data: { confirm: "【確認] コメントを削除しますか？" } %>
+          <% end %>
         <% end %>
       </div>
 
-      <div>
+      <div class="text-right">
         <%= form_with model: [@review, @comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信" %>
+          <%= f.text_area :comment, rows: '2', placeholder: "コメントをここに" %></br>
+          <%= f.submit "送信", class: "mt-2 mb-2" %>
         <% end %>
       </div>
 
