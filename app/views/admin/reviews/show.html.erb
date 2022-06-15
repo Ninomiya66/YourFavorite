@@ -1,0 +1,62 @@
+<div class="container" style="height: 100vh;">
+  <div class="row justify-content-center" style="height: 100%;">
+
+    <div style="height: 100%;">
+
+      <h2 class="text-center mt-3 mb-3">投稿内容</h2>
+
+      <table class="table">
+
+        <tr>
+          <th></th>
+          <td><%= image_tag @review.get_image(500,500) %></td>
+        </tr>
+
+        <tr>
+          <th>商品名</th>
+          <td><%= @review.name %></td>
+        </tr>
+
+        <tr>
+          <th>メーカー名</th>
+          <td><%= @review.maker %></td>
+        </tr>
+
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @review.genre %></td>
+        </tr>
+
+        <tr>
+          <th>税抜価格</th>
+          <td><%= @review.price %></td>
+        </tr>
+
+        <tr>
+          <th>評価内容</th>
+          <td><%= @review.introduction %></td>
+        </tr>
+
+      </table>
+
+      <div>
+        <p>コメント件数：<%= @review.comments.count %></p>
+        <% @review.comments.each do |comment| %>
+          <%= comment.customer.name %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %></br>
+          <%= comment.comment %>
+          <%= link_to "削除", admin_review_comment_path(comment.review, comment), method: :delete, data: { confirm: "【確認] コメントを削除しますか？" } %>
+        <% end %>
+      </div>
+
+      <div class="mt-3">
+        <%= link_to "Back", admin_reviews_path, class: "btn btn-outline-secondary btn-block" %>
+      </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
